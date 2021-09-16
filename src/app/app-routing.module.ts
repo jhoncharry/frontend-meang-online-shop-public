@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { PublicRoutingModule } from './@public/pages/public-routing.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
