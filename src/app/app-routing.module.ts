@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PublicRoutingModule } from './@public/pages/public-routing.module';
+import { PublicRoutingModule } from './@public/pages/public.routing';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },

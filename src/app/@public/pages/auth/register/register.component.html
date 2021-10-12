@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <h1>Registro de usuario</h1>
+        <p>
+          Rellena los datos del formulario para efectuar el registro de tu
+          cuenta de usuario.
+        </p>
+        <hr />
+
+        <label for="name"><b>Nombre</b></label>
+        <input
+          type="text"
+          placeholder="Enter name"
+          name="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && getControl.name.errors }"
+          required
+        />
+        <div
+          *ngIf="submitted && getControl.name.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="getControl.name.errors.required">Name is required</div>
+        </div>
+
+        <label for="name"><b>Apellido</b></label>
+        <input
+          type="text"
+          placeholder="Enter lastname"
+          name="lastname"
+          formControlName="lastname"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && getControl.lastname.errors }"
+          required
+        />
+        <div
+          *ngIf="submitted && getControl.lastname.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="getControl.lastname.errors.required">
+            Lastname is required
+          </div>
+        </div>
+
+        <label for="email"><b>Fecha de nacimiento</b></label>
+        <app-date-picker-legal-age
+          [datePicker]="datePickerValidation"
+          (newDate)="dataAsign($event)"
+        ></app-date-picker-legal-age>
+        <div
+          *ngIf="submitted && getControl.birthday.errors"
+          class="invalid-feedback d-block"
+        >
+          <div *ngIf="getControl.birthday.errors.required">
+            Birthday is required
+          </div>
+        </div>
+
+        <label for="email"><b>Email</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          name="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && getControl.email.errors }"
+          required
+        />
+        <div
+          *ngIf="submitted && getControl.email.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="getControl.email.errors.required">Email is required</div>
+          <div *ngIf="getControl.email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="psw"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && getControl.password.errors
+          }"
+          required
+        />
+        <div
+          *ngIf="submitted && getControl.password.errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="getControl.password.errors.required">
+            Password is required
+          </div>
+        </div>
+
+        <p>
+          By creating an account you agree to our
+          <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
+        </p>
+        <p>
+          ¿Ya tiene una cuenta?
+          <a [routerLink]="['/login']" style="color: dodgerblue"
+            >Iniciar sesión</a
+          >.
+        </p>
+        <div class="row">
+          <div class="col-lg">
+            <button type="submit" class="signup-btn">Registrarse</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg"></div>
+  </div>
+</div>

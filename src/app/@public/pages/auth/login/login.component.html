@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <h1>Inicio de sesión</h1>
+        <p>Introduzca los credenciales para iniciar la sesión</p>
+        <p class="psw">
+          ¿No tienes cuenta? Entra
+          <a href="#">aquí</a> para crearla gratis
+        </p>
+        <hr />
+        <div class="mb-3">
+          <label for="uname"><b>Correo electrónico</b></label>
+          <input
+            type="text"
+            placeholder="Introduzca la correo electrónico"
+            name="uname"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && getControl.email.errors }"
+            required
+          />
+          <div
+            *ngIf="submitted && getControl.email.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="getControl.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="getControl.email.errors.email">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="psw"><b>Contraseña</b></label>
+          <input
+            type="password"
+            placeholder="Introduzca la contraseña"
+            name="psw"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && getControl.password.errors
+            }"
+            required
+          />
+          <div
+            *ngIf="submitted && getControl.password.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="getControl.password.errors.required">
+              Password is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg">
+            <button type="submit" class="signup-btn">Iniciar sesión</button>
+          </div>
+        </div>
+        <div class="more-options">
+          <p class="psw">
+            ¿Has olvidado la <a [routerLink]="['/forgot']">contraseña?</a>
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>
