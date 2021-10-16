@@ -6,7 +6,6 @@ export const login = gql`
     login(email: $email, password: $password) {
       status
       message
-      token
       user {
         ...UserObject
       }
