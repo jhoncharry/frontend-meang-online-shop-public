@@ -13,8 +13,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerInterceptor } from './@core/interceptors/spinner.interceptor';
 
-// TODO REFACTORIZAR EL FRONTEND
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,7 +26,7 @@ import { SpinnerInterceptor } from './@core/interceptors/spinner.interceptor';
     BrowserAnimationsModule,
   ],
   providers: [
-/*     {
+    /*     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptor,
       multi: true,
