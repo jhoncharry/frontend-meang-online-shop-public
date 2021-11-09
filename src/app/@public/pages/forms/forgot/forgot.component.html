@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form [formGroup]="forgotForm" (ngSubmit)="forgot()">
+        <h2>Añade tu correo electrónico</h2>
+        <p>
+          Te enviaremos un enlace a tu correo electrónico para resetear tu
+          contraseña y cambiarlo
+        </p>
+        <hr />
+
+        <div class="mb-3">
+          <label for="mail">Correo electrónico</label>
+          <input
+            type="text"
+            placeholder="Introduzca la correo electrónico"
+            name="uname"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && getControl.email.errors }"
+            required
+          />
+          <div
+            *ngIf="submitted && getControl.email.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="getControl.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="getControl.email.errors.email">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg">
+            <button type="submit" class="signup-btn">Reset password</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>

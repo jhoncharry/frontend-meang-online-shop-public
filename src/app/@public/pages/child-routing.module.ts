@@ -4,11 +4,17 @@ import { AdminGuard } from 'src/app/@core/guards/admin.guard';
 import { AuthGuard } from 'src/app/@core/guards/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
+import { ActiveComponent } from './forms/active/active.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { ForgotComponent } from './forms/forgot/forgot.component';
 import { HomeComponent } from './home/home.component';
 
 const childRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'active/:token', component: ActiveComponent },
+  { path: 'forgot', component: ForgotComponent },
+  { path: 'reset/:token', component: ChangePasswordComponent },
   {
     path: '',
     canActivate: [AuthGuard],
