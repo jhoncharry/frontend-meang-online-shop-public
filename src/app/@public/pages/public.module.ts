@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ForgotModule } from './forms/forgot/forgot.module';
 import { ChangePasswordModule } from './forms/change-password/change-password.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [PublicComponent],
@@ -13,6 +14,7 @@ import { ChangePasswordModule } from './forms/change-password/change-password.mo
     CommonModule,
     SharedModule,
     RouterModule,
+    HomeModule,
     ForgotModule,
     ChangePasswordModule,
   ],
