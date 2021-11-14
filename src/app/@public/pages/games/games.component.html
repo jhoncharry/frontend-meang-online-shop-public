@@ -1,0 +1,38 @@
+<div class="container-fluid" *ngIf="!loading">
+  <app-product-category-list
+    [title]="gamesPageInformation.title"
+    [productsList]="productsList"
+    [description]="gamesPageInformation.description"
+  ></app-product-category-list>
+
+  <section>
+    <div class="container">
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          [collectionSize]="total"
+          [(page)]="page"
+          (pageChange)="changePage($event)"
+          [pageSize]="itemsPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [ellipses]="false"
+          [boundaryLinks]="true"
+        >
+        </ngb-pagination>
+
+        <h1>{{ total }}</h1>
+
+        <select
+          class="form-control"
+          style="width: auto; height: fit-content"
+          [(ngModel)]="itemsPage"
+          (ngModelChange)="changeItemPage($event)"
+        >
+          <option *ngFor="let item of allowPageItems" [ngValue]="item">
+            {{ item }} items per page
+          </option>
+        </select>
+      </div>
+    </div>
+  </section>
+</div>

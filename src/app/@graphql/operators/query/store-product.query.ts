@@ -9,6 +9,8 @@ export const productsOffersLast = gql`
     $topPrice: Float
     $lastUnits: Int
     $random: Boolean
+    $showInfo: Boolean = false
+    $showPlatform: Boolean = false
   ) {
     storeProductsOffersLast(
       page: $page
@@ -18,6 +20,12 @@ export const productsOffersLast = gql`
       lastUnits: $lastUnits
       random: $random
     ) {
+      info @include(if: $showInfo) {
+        page
+        pages
+        itemsPage
+        total
+      }
       status
       message
       storeProduct {
@@ -44,8 +52,10 @@ export const productsByPlatforms = gql`
     $page: Int
     $itemsPage: Int
     $active: ActiveFilterEnum
-    $platform: ID!
+    $platform: [ID!]!
     $random: Boolean
+    $showInfo: Boolean = false
+    $showPlatform: Boolean = false
   ) {
     storeProductsByPlatforms(
       page: $page
@@ -54,6 +64,12 @@ export const productsByPlatforms = gql`
       platform: $platform
       random: $random
     ) {
+      info @include(if: $showInfo) {
+        page
+        pages
+        itemsPage
+        total
+      }
       status
       message
       storeProduct {

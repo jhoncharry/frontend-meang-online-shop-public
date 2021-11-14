@@ -1,18 +1,20 @@
-<shop-carousel-items [items]="items"></shop-carousel-items>
-<app-product-category-list
-  *ngIf="listOne"
-  [title]="'The best history games'"
-  [productsList]="listOne"
-></app-product-category-list>
+<div class="container-fluid" *ngIf="!loading">
+  <shop-carousel-items [items]="items"></shop-carousel-items>
+  <app-product-category-list
+    *ngIf="listOne"
+    [title]="'The best history games'"
+    [productsList]="listOne"
+  ></app-product-category-list>
 
-<app-product-category-list
-  *ngIf="listTwo"
-  [title]="'Cheap games for less than 35€'"
-  [productsList]="listTwo"
-></app-product-category-list>
+  <app-product-category-list
+    *ngIf="listTwo"
+    [title]="'Cheap games for less than 35€'"
+    [productsList]="listTwo"
+  ></app-product-category-list>
 
-<app-product-category-list
-  *ngIf="listThree"
-  [title]="'Pc games'"
-  [productsList]="listThree"
-></app-product-category-list>
+  <app-product-category-list
+    *ngIf="listThree"
+    [title]="'Pc games'"
+    [productsList]="listThree"
+  ></app-product-category-list>
+</div>

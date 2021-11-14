@@ -2,6 +2,7 @@
   <div class="container">
     <h2>{{ title }}</h2>
     <hr />
+    <p *ngIf="description">{{ description }}</p>
     <div class="row">
       <div
         class="col-lg-3"
@@ -9,7 +10,7 @@
         style="margin-bottom: 12px"
       >
         <shop-product-item
-          [showDesc]="false"
+          [showDesc]="p.description !== ''"
           [product]="p"
           (add)="addToCart($event)"
           (itemDetails)="showProductDetails($event)"
