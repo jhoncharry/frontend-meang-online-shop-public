@@ -2,7 +2,10 @@ import { gql } from 'apollo-angular';
 import { storeProductFragment } from '../fragment/store-product.fragment';
 
 export const homePage = gql`
-  query homePageInformation($showPlatform: Boolean = false) {
+  query homePageInformation(
+    $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
+  ) {
     carousel: storeProductsOffersLast(itemsPage: 6, lastUnits: 20) {
       storeProduct {
         ...StoreProductObject

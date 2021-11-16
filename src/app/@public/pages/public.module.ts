@@ -8,6 +8,7 @@ import { ForgotModule } from './forms/forgot/forgot.module';
 import { ChangePasswordModule } from './forms/change-password/change-password.module';
 import { HomeModule } from './home/home.module';
 import { GamesModule } from './games/games.module';
+import { DetailsModule } from './games/details/details.module';
 
 @NgModule({
   declarations: [PublicComponent],
@@ -17,6 +18,7 @@ import { GamesModule } from './games/games.module';
     RouterModule,
     HomeModule,
     GamesModule,
+    DetailsModule,
     ForgotModule,
     ChangePasswordModule,
   ],

@@ -11,6 +11,7 @@ export const productsOffersLast = gql`
     $random: Boolean
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
   ) {
     storeProductsOffersLast(
       page: $page
@@ -56,6 +57,7 @@ export const productsByPlatforms = gql`
     $random: Boolean
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
+    $relationScreens: Boolean = false
   ) {
     storeProductsByPlatforms(
       page: $page
@@ -72,6 +74,37 @@ export const productsByPlatforms = gql`
       }
       status
       message
+      storeProduct {
+        ...StoreProductObject
+      }
+    }
+  }
+  ${storeProductFragment}
+`;
+
+export const storeProductDetails = gql`
+  query storeProductDetails(
+    $id: Int!
+    $showPlatform: Boolean = true
+    $relationScreens: Boolean = true
+  ) {
+    storeProductDetails(id: $id) {
+      status
+      message
+      storeProduct {
+        ...StoreProductObject
+      }
+    }
+  }
+  ${storeProductFragment}
+`;
+
+export const storeRandomProducts = gql`
+  query randomItems(
+    $showPlatform: Boolean = true
+    $relationScreens: Boolean = false
+  ) {
+    randomItems: storeProductsOffersLast(itemsPage: 6, random: true) {
       storeProduct {
         ...StoreProductObject
       }

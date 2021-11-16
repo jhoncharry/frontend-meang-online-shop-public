@@ -7,12 +7,14 @@ import { ContactComponent } from './contact/contact.component';
 import { ActiveComponent } from './forms/active/active.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { ForgotComponent } from './forms/forgot/forgot.component';
+import { DetailsComponent } from './games/details/details.component';
 import { GamesComponent } from './games/games.component';
 import { HomeComponent } from './home/home.component';
 
 const childRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'games/details/:id', component: DetailsComponent },
   { path: 'games/:type/:filter', component: GamesComponent },
   { path: 'active/:token', component: ActiveComponent },
   { path: 'forgot', component: ForgotComponent },

@@ -1,0 +1,77 @@
+<!-- Page Content -->
+<div class="container" *ngIf="product && !loading">
+  <!-- Portfolio Item Row -->
+  <div class="row">
+    <div class="col-md-1" id="screens-section">
+      <img
+        class="img-fluid mini"
+        *ngFor="let miniImg of screens; let i = index"
+        [src]="miniImg"
+        alt="Screen {{ i }}"
+        (click)="selectImgMain(i)"
+      />
+    </div>
+    <div class="col-md-7">
+      <img class="img-fluid main-img" [src]="selectImage" alt="" />
+    </div>
+    <div class="col-md-4">
+      <h4 class="my-3">{{ product.name }} ({{ product.description }})</h4>
+      <div class="row">
+        <div class="col-lg-12">
+          <shop-rating [rating]="product.rating!"></shop-rating>
+        </div>
+        <div class="col-lg-12">
+          <ng-template #noDiscount>
+            <div class="price">{{ currencySelect }} {{ product.price }}</div>
+          </ng-template>
+          <div class="price" *ngIf="product.discount; else noDiscount">
+            {{ currencySelect }} {{ product.priceDiscount | number }}
+            <span> {{ currencySelect }} {{ product.price | number }} </span>
+            <span class="discount-percentage"> ({{ product.discount }}%) </span>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          Stock: {{ product.stock }}
+          <hr />
+          <shop-qty-selector
+            [qty]="product.qty!"
+            [stock]="product.stock"
+            (updateValue)="changeValue($event)"
+          ></shop-qty-selector>
+        </div>
+      </div>
+      <br />
+      <span class="h5"> Platforms: </span>&nbsp;
+      <select (change)="selectOtherPlatform($event)">
+        <option [value]="product.id">{{ product.description }}</option>
+        <option [value]="option.id" *ngFor="let option of relationalProducts">
+          {{ option.platform.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <!-- /.row -->
+  <hr />
+  <!-- Related Projects Row -->
+  <h3 class="my-4">Platform related games</h3>
+
+  <div class="row">
+    <div
+      class="col-md-2 col-sm-6 mb-4"
+      *ngFor="let itemInformation of randomItems"
+    >
+      <a
+        [routerLink]="['/games/details', itemInformation.id]"
+        title="{{ itemInformation.name }} ({{ itemInformation.description }})"
+      >
+        <img
+          class="img-fluid more-games"
+          [src]="itemInformation.img"
+          alt="{{ itemInformation.name }} ({{ itemInformation.description }})"
+        />
+      </a>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container -->

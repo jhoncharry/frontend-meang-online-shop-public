@@ -1,0 +1,55 @@
+.container {
+  margin-top: 25px;
+}
+
+.mini {
+  margin-bottom: 10px;
+}
+
+/** Price styles**/
+
+.price {
+  font-size: 22px;
+  font-weight: 800;
+  color: #cc1c39;
+  text-align: left;
+  margin-left: 5px;
+  margin-bottom: 12px;
+}
+
+.price span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #999;
+  text-align: left;
+  margin-left: 5px;
+  margin-bottom: 12px;
+  text-decoration: line-through;
+}
+
+.price span.discount-percentage {
+  text-decoration: none;
+}
+
+// Responsive
+
+@media (max-width: 600px) {
+  #screens-section {
+    display: none;
+  }
+}
+
+.main-img,
+.more-games {
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+// More Games - Random items
+
+.more-games {
+  max-height: 105px;
+}

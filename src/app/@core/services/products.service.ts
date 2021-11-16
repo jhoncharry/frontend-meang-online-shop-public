@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { Apollo } from 'apollo-angular';
 import { first, map } from 'rxjs/operators';
+import { detailsPage } from 'src/app/@graphql/operators/query/details-page.query';
 import { homePage } from 'src/app/@graphql/operators/query/home-page.query';
 import {
   productsByPlatforms,
   productsOffersLast,
+  storeProductDetails,
+  storeRandomProducts,
 } from 'src/app/@graphql/operators/query/store-product.query';
 import { ApiService } from 'src/app/@graphql/service/api.service';
 import { ActiveValues } from '../types/user-active';
@@ -93,22 +96,59 @@ export class ProductsService extends ApiService {
     );
   }
 
+  getItem(id: number) {
+    return this.get(
+      detailsPage,
+      {
+        id,
+      },
+      undefined,
+      false
+    ).pipe(
+      first(),
+      map((result: any) => {
+        console.log('THE RESULT', result);
+        const details = result.data.details;
+        const randomItems = result.data.randomItems;
+        return {
+          product: this.setInObject(details.storeProduct, true),
+          screens: details.storeProduct.product.screenshoot,
+          relational: details.storeProduct.relationalProducts,
+          random: this.manageInformation(randomItems.storeProduct, true),
+        };
+      })
+    );
+  }
+
+  getRandomItems() {
+    return this.get(storeRandomProducts).pipe(
+      first(),
+      map((result: any) => {
+        console.log('RANDOM', result);
+        const data = result.data.randomItems.storeProduct;
+        return this.manageInformation(data, true);
+      })
+    );
+  }
+
+  private setInObject(storeProduct: any, showPlatform: any) {
+    return {
+      id: storeProduct.id,
+      price: storeProduct.price,
+      stock: storeProduct.stock,
+      img: storeProduct.product.img,
+      name: storeProduct.product.name,
+      rating: storeProduct.product.rating,
+      description:
+        storeProduct.platform && showPlatform ? storeProduct.platform.name : '',
+      qty: 1,
+    };
+  }
+
   private manageInformation(listProducts: any, showPlatform = true) {
     const resultList: Array<IProduct> = [];
     listProducts.map((storeProduct: any) => {
-      resultList.push({
-        id: storeProduct.id,
-        price: storeProduct.price,
-        stock: storeProduct.stock,
-        img: storeProduct.product.img,
-        name: storeProduct.product.name,
-        rating: storeProduct.product.rating,
-        description:
-          storeProduct.platform && showPlatform
-            ? storeProduct.platform.name
-            : '',
-        qty: 1,
-      });
+      resultList.push(this.setInObject(storeProduct, showPlatform));
     });
     return resultList;
   }

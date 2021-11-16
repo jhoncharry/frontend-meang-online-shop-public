@@ -10,13 +10,18 @@ import { DocumentNode } from 'apollo-link';
 export class ApiService {
   constructor(protected apollo: Apollo) {}
 
-  protected get(query: DocumentNode, variables?: object, context?: object) {
+  protected get(
+    query: DocumentNode,
+    variables?: object,
+    context?: object,
+    cache: boolean = true
+  ) {
     return this.apollo
       .watchQuery({
         query,
         variables,
         context,
-        fetchPolicy: 'no-cache',
+        fetchPolicy: cache ? 'network-only' : 'no-cache',
       })
       .valueChanges.pipe(map((result: any) => result));
   }
