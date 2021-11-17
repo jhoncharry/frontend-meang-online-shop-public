@@ -13,6 +13,12 @@ export const storeProductFragment = gql`
         count
       }
       screenshoot @include(if: $relationScreens)
+      clip @include(if: $showClips) {
+        preview
+        clips {
+          full
+        }
+      }
     }
     platform @include(if: $showPlatform) {
       id

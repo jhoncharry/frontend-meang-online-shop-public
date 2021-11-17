@@ -6,8 +6,9 @@ export const detailsPage = gql`
     $id: Int!
     $showPlatform: Boolean = true
     $relationScreens: Boolean = true
+    $showClips: Boolean = true
   ) {
-    randomItems: storeProductsOffersLast(itemsPage: 6, random: true) {
+    randomItems: storeProductsOffersLast(itemsPage: 10, random: true) {
       storeProduct {
         ...StoreProductObject
       }

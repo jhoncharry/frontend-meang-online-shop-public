@@ -5,6 +5,7 @@ export const homePage = gql`
   query homePageInformation(
     $showPlatform: Boolean = false
     $relationScreens: Boolean = false
+    $showClips: Boolean = false
   ) {
     carousel: storeProductsOffersLast(itemsPage: 6, lastUnits: 20) {
       storeProduct {

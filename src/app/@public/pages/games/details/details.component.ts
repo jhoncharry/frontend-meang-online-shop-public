@@ -15,8 +15,13 @@ import products from '../../../../../assets/@data/products.json';
 })
 export class DetailsComponent implements OnInit {
   product: IProduct;
-  // products[Math.floor(Math.random() * products.length)];
+
   selectImage: string;
+
+  previewVideo: string;
+  clipVideo: string;
+  isVideoSelected: boolean = false;
+  isplayVideo: boolean = false;
 
   currencySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.EURO];
   screens = [];
@@ -36,6 +41,8 @@ export class DetailsComponent implements OnInit {
       loadingData('Loading', 'Wait while the information is being loaded');
       this.loading = true;
 
+      this.resetVideoValues();
+
       this.loadDataValue(+params.id);
     });
   }
@@ -46,6 +53,9 @@ export class DetailsComponent implements OnInit {
 
       this.selectImage = this.product.img;
       this.screens = result.screens;
+
+      this.previewVideo = result.clip?.preview || '';
+      this.clipVideo = result.clip?.clips.full || '';
 
       this.relationalProducts = result.relational;
 
@@ -60,11 +70,25 @@ export class DetailsComponent implements OnInit {
     console.log('VALORR', $event);
   }
 
-  selectImgMain(index: any) {
+  screensHover(index: any) {
+    this.resetVideoValues();
     this.selectImage = this.screens[index];
+  }
+
+  videoHover() {
+    this.isVideoSelected = true;
+  }
+
+  playVideo() {
+    this.isplayVideo = true;
   }
 
   selectOtherPlatform($event: any) {
     this.loadDataValue(+$event.target.value);
+  }
+
+  resetVideoValues() {
+    this.isVideoSelected = false;
+    this.isplayVideo = false;
   }
 }

@@ -115,6 +115,7 @@ export class ProductsService extends ApiService {
           screens: details.storeProduct.product.screenshoot,
           relational: details.storeProduct.relationalProducts,
           random: this.manageInformation(randomItems.storeProduct, true),
+          clip: details.storeProduct.product.clip,
         };
       })
     );

@@ -6,6 +6,10 @@
   margin-bottom: 10px;
 }
 
+#screens-section {
+  padding-right: 0px;
+}
+
 /** Price styles**/
 
 .price {
@@ -52,4 +56,58 @@
 
 .more-games {
   max-height: 105px;
+}
+
+/* Container holding the image and the text */
+
+.preview-play-button {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.play-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Images Effects
+.cards {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cards:hover {
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  transform: scale(1.1);
+}
+
+// Card Bootstrap
+
+.card {
+  padding: 0px;
+  margin: 0px 15px;
+}
+.card a {
+  text-decoration: none;
+  color: #212529;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+// ***************************
+.video-fluid {
+  width: 100%;
+  height: auto;
+}
+
+// ***************************
+.cursor-pointer {
+  cursor: pointer;
 }

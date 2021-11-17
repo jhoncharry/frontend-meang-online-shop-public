@@ -12,6 +12,7 @@ export const productsOffersLast = gql`
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
     $relationScreens: Boolean = false
+    $showClips: Boolean = false
   ) {
     storeProductsOffersLast(
       page: $page
@@ -58,6 +59,7 @@ export const productsByPlatforms = gql`
     $showInfo: Boolean = false
     $showPlatform: Boolean = false
     $relationScreens: Boolean = false
+    $showClips: Boolean = false
   ) {
     storeProductsByPlatforms(
       page: $page

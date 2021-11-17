@@ -4,16 +4,55 @@
   <div class="row">
     <div class="col-md-1" id="screens-section">
       <img
-        class="img-fluid mini"
+        class="img-fluid mini cursor-pointer cards rounded"
         *ngFor="let miniImg of screens; let i = index"
         [src]="miniImg"
         alt="Screen {{ i }}"
-        (click)="selectImgMain(i)"
+        (mouseover)="screensHover(i)"
       />
+
+      <div
+        class="preview-play-button cursor-pointer cards"
+        *ngIf="previewVideo"
+        (mouseover)="videoHover()"
+      >
+        <img class="img-fluid" [src]="previewVideo" alt="Screen" />
+        <div class="play-centered">
+          <i class="fas fa-play-circle"></i>
+        </div>
+      </div>
     </div>
+
     <div class="col-md-7">
-      <img class="img-fluid main-img" [src]="selectImage" alt="" />
+      <img
+        class="img-fluid main-img rounded"
+        [src]="selectImage"
+        alt=""
+        *ngIf="!isVideoSelected"
+      />
+
+      <div
+        class="preview-play-button cursor-pointer"
+        *ngIf="isVideoSelected && !isplayVideo"
+        (click)="playVideo()"
+      >
+        <img class="img-fluid main-img rounded" [src]="previewVideo" alt="" />
+        <div class="play-centered">
+          <i class="fas fa-play-circle fa-2x"></i>
+        </div>
+      </div>
+      <video
+        class="video-fluid rounded"
+        autoplay
+        controls
+        controlslist="nodownload"
+        disablepictureinpicture
+        *ngIf="isVideoSelected && isplayVideo"
+      >
+        <source [src]="clipVideo" type="video/mp4" />
+      </video>
     </div>
+
     <div class="col-md-4">
       <h4 class="my-3">{{ product.name }} ({{ product.description }})</h4>
       <div class="row">
@@ -57,7 +96,7 @@
 
   <div class="row">
     <div
-      class="col-md-2 col-sm-6 mb-4"
+      class="card col-md-2 col-sm-6 mb-4 cards"
       *ngFor="let itemInformation of randomItems"
     >
       <a
@@ -65,13 +104,19 @@
         title="{{ itemInformation.name }} ({{ itemInformation.description }})"
       >
         <img
-          class="img-fluid more-games"
+          class="card-img-top img-fluid more-games rounded"
           [src]="itemInformation.img"
           alt="{{ itemInformation.name }} ({{ itemInformation.description }})"
         />
+
+        <div class="card-body">
+          <h5 class="card-title">{{ itemInformation.name }}</h5>
+          <p class="card-text">({{ itemInformation.description }})</p>
+        </div>
       </a>
     </div>
   </div>
   <!-- /.row -->
 </div>
+
 <!-- /.container -->
