@@ -16,7 +16,7 @@
         *ngIf="previewVideo"
         (mouseover)="videoHover()"
       >
-        <img class="img-fluid" [src]="previewVideo" alt="Screen" />
+        <img class="img-fluid rounded" [src]="previewVideo" alt="Screen" />
         <div class="play-centered">
           <i class="fas fa-play-circle"></i>
         </div>
@@ -90,31 +90,15 @@
     </div>
   </div>
   <!-- /.row -->
+  <br />
   <hr />
   <!-- Related Projects Row -->
-  <h3 class="my-4">Platform related games</h3>
-
   <div class="row">
-    <div
-      class="card col-md-2 col-sm-6 mb-4 cards"
-      *ngFor="let itemInformation of randomItems"
-    >
-      <a
-        [routerLink]="['/games/details', itemInformation.id]"
-        title="{{ itemInformation.name }} ({{ itemInformation.description }})"
-      >
-        <img
-          class="card-img-top img-fluid more-games rounded"
-          [src]="itemInformation.img"
-          alt="{{ itemInformation.name }} ({{ itemInformation.description }})"
-        />
-
-        <div class="card-body">
-          <h5 class="card-title">{{ itemInformation.name }}</h5>
-          <p class="card-text">({{ itemInformation.description }})</p>
-        </div>
-      </a>
-    </div>
+    <app-product-category-list
+      *ngIf="randomItems"
+      [title]="'Platform related games'"
+      [productsList]="randomItems"
+    ></app-product-category-list>
   </div>
   <!-- /.row -->
 </div>

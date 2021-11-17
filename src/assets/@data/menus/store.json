@@ -5,6 +5,11 @@
     "icon": ""
   },
   {
+    "url": "/games/platforms/sony",
+    "label": "Sony",
+    "icon": ""
+  },
+  {
     "url": "/games/platforms/microsoft",
     "label": "Microsoft",
     "icon": ""
