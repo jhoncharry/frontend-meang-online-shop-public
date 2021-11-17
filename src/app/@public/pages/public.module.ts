@@ -9,6 +9,7 @@ import { ChangePasswordModule } from './forms/change-password/change-password.mo
 import { HomeModule } from './home/home.module';
 import { GamesModule } from './games/games.module';
 import { DetailsModule } from './games/details/details.module';
+import { ShoppingCartModule } from '../components/shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [PublicComponent],
@@ -19,6 +20,7 @@ import { DetailsModule } from './games/details/details.module';
     HomeModule,
     GamesModule,
     DetailsModule,
+    ShoppingCartModule,
     ForgotModule,
     ChangePasswordModule,
   ],

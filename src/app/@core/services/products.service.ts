@@ -25,12 +25,12 @@ export class ProductsService extends ApiService {
     return this.get(homePage, { showPlatform: true }).pipe(
       first(),
       map((result: any) => {
-        console.log('HOME PAGE', result);
+        // console.log('HOME PAGE', result);
         return {
           carousel: result.data.carousel,
-          ps4: this.manageInformation(result.data.ps4.storeProduct, false),
+          ps4: this.manageInformation(result.data.ps4.storeProduct, true),
           topPrice: this.manageInformation(result.data.topPrice35.storeProduct),
-          pc: this.manageInformation(result.data.pc.storeProduct, false),
+          pc: this.manageInformation(result.data.pc.storeProduct, true),
         };
       })
     );

@@ -4,17 +4,20 @@
     *ngIf="listOne"
     [title]="'The best history games'"
     [productsList]="listOne"
+    [showDesc]="false"
   ></app-product-category-list>
 
   <app-product-category-list
     *ngIf="listTwo"
     [title]="'Cheap games for less than 35€'"
     [productsList]="listTwo"
+    [showDesc]="true"
   ></app-product-category-list>
 
   <app-product-category-list
     *ngIf="listThree"
     [title]="'Pc games'"
     [productsList]="listThree"
+    [showDesc]="false"
   ></app-product-category-list>
 </div>
