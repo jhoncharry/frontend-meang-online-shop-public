@@ -6,6 +6,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
 import { ActiveComponent } from './forms/active/active.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { CheckoutComponent } from './forms/checkout/checkout.component';
 import { ForgotComponent } from './forms/forgot/forgot.component';
 import { DetailsComponent } from './games/details/details.component';
 import { GamesComponent } from './games/games.component';
@@ -16,6 +17,7 @@ const childRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'games/details/:id', component: DetailsComponent },
   { path: 'games/:type/:filter', component: GamesComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'active/:token', component: ActiveComponent },
   { path: 'forgot', component: ForgotComponent },
   { path: 'reset/:token', component: ChangePasswordComponent },

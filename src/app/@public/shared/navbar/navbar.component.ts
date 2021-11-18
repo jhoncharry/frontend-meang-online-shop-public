@@ -8,6 +8,8 @@ import showMenuItems from '../../../../assets/@data/menus/store.json';
 import Swal from 'sweetalert2';
 import { IMenuItem } from 'src/app/@core/interfaces/menu-item.interface';
 import { CartService } from '../../core/services/cart.service';
+import { REDIRECTS_ROUTES } from 'src/app/@core/types/redirects-routes';
+import { ICart } from '../../components/shopping-cart/shopping-cart.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +24,8 @@ export class NavbarComponent implements OnInit {
 
   currentUser$: Observable<User | null>;
 
+  cartItemsTotal: number;
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -33,6 +37,14 @@ export class NavbarComponent implements OnInit {
       this.currentUser = x;
       this.userLabel = `${this.currentUser?.name} ${this.currentUser?.lastname}`;
     });
+
+    this.cartService.itemsVar$.subscribe((data: ICart) => {
+      if (data) {
+        this.cartItemsTotal = data.subtotal;
+      }
+    });
+
+    this.cartItemsTotal = this.cartService.initialize().subtotal;
   }
 
   open() {
@@ -41,10 +53,15 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    let previousRoute = this.router.url;
+
     this.auth.logout().subscribe(
       ({ data: { logout }, loading, errors }) => {
         if (logout) {
           Swal.fire('Logout', 'Successful Logout', 'success');
+          if (REDIRECTS_ROUTES.includes(previousRoute)) {
+            localStorage.setItem('route_after_login', previousRoute);
+          }
           this.router.navigateByUrl('/login');
           return;
         }

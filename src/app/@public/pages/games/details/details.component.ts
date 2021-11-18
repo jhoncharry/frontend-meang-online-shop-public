@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CURRENCIES_SYMBOL, CURRENCY_LIST } from '@mugan86/ng-shop-ui';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
-import { mergeMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { first, mergeMap } from 'rxjs/operators';
 import { ProductsService } from 'src/app/@core/services/products.service';
+import { ICart } from 'src/app/@public/components/shopping-cart/shopping-cart.interface';
+import { CartService } from 'src/app/@public/core/services/cart.service';
 import { closeAlert, loadingData } from 'src/app/@public/shared/alerts/alerts';
-
-import products from '../../../../../assets/@data/products.json';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   product: IProduct;
 
   selectImage: string;
@@ -31,10 +32,17 @@ export class DetailsComponent implements OnInit {
 
   loading: boolean;
 
+  changeItemsCart: Subscription;
+
   constructor(
     private producService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: CartService
   ) {}
+
+  ngOnDestroy(): void {
+    this.changeItemsCart.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -45,11 +53,31 @@ export class DetailsComponent implements OnInit {
 
       this.loadDataValue(+params.id);
     });
+
+    this.changeItemsCart = this.cartService.itemsVar$.subscribe(
+      (data: ICart) => {
+        if (data.subtotal === 0) {
+          this.product.qty = 1;
+          return;
+        }
+        this.product.qty = this.findProduct(+this.product.id)?.qty || 1;
+      }
+    );
+  }
+
+  findProduct(id: number) {
+    return this.cartService.cart.products.find((item) => +item.id === id);
   }
 
   loadDataValue(id: number) {
     return this.producService.getItem(id).subscribe((result) => {
       this.product = result.product;
+
+      const saveProductInCart = this.findProduct(+this.product.id);
+      this.product.qty =
+        saveProductInCart !== undefined
+          ? saveProductInCart?.qty
+          : this.product.qty;
 
       this.selectImage = this.product.img;
       this.screens = result.screens;
@@ -66,8 +94,8 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  changeValue($event: any) {
-    console.log('VALORR', $event);
+  changeValue(qty: number) {
+    this.product.qty = qty;
   }
 
   screensHover(index: any) {
@@ -90,5 +118,9 @@ export class DetailsComponent implements OnInit {
   resetVideoValues() {
     this.isVideoSelected = false;
     this.isplayVideo = false;
+  }
+
+  addToCart() {
+    this.cartService.manageProduct(this.product);
   }
 }

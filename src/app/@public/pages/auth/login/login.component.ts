@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/@core/services/auth.service';
+import { REDIRECTS_ROUTES } from 'src/app/@core/types/redirects-routes';
 
 import Swal from 'sweetalert2';
 
@@ -44,14 +45,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.submitted = true;
+
     if (this.loginForm.invalid) {
       return;
     }
+
+    let checkPreviousRoute = localStorage.getItem('route_after_login') || '';
 
     this.auth.login(this.loginForm.value).subscribe(
       ({ data: { login }, errors }) => {
         if (login) {
           Swal.fire('Login', 'Successful login', 'success');
+
+          if (REDIRECTS_ROUTES.includes(checkPreviousRoute)) {
+            this.router.navigateByUrl(checkPreviousRoute);
+            localStorage.removeItem('route_after_login');
+            return;
+          }
+
           this.router.navigateByUrl('/');
           return;
         }

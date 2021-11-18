@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CURRENCIES_SYMBOL, CURRENCY_LIST } from '@mugan86/ng-shop-ui';
 import { IProduct } from '@mugan86/ng-shop-ui/lib/interfaces/product.interface';
 import { CartService } from '../../core/services/cart.service';
@@ -14,9 +15,8 @@ export class ShoppingCartComponent implements OnInit {
 
   currencySelect = CURRENCIES_SYMBOL[CURRENCY_LIST.EURO];
 
-  constructor(private cartService: CartService) {
+  constructor(private router: Router, private cartService: CartService) {
     this.cartService.itemsVar$.subscribe((data: ICart) => {
-      console.log(data);
       if (data) {
         this.cart = data;
       }
@@ -45,7 +45,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   process() {
-    console.log('ddddd', this.cart);
+    this.router.navigateByUrl('/checkout');
+    this.closeNav();
   }
 
   closeNav() {

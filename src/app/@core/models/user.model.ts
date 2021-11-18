@@ -25,4 +25,7 @@ export class User {
   public get lastname(): String | null {
     return this._lastname;
   }
+  public get email(): String | null {
+    return this._email;
+  }
 }

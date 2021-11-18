@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { GamesModule } from './games/games.module';
 import { DetailsModule } from './games/details/details.module';
 import { ShoppingCartModule } from '../components/shopping-cart/shopping-cart.module';
+import { CheckoutModule } from './forms/checkout/checkout.module';
 
 @NgModule({
   declarations: [PublicComponent],
@@ -21,6 +22,7 @@ import { ShoppingCartModule } from '../components/shopping-cart/shopping-cart.mo
     GamesModule,
     DetailsModule,
     ShoppingCartModule,
+    CheckoutModule,
     ForgotModule,
     ChangePasswordModule,
   ],
