@@ -111,6 +111,7 @@ export class AuthService extends ApiService {
   // User logout method
   logout() {
     localStorage.removeItem('v1_leaf');
+    
     this.apollo.client.resetStore();
     return this.get(logout).pipe(
       first(),

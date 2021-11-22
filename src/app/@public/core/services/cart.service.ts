@@ -28,6 +28,16 @@ export class CartService {
     return this.cart;
   }
 
+  orderDescription() {
+    let description = '';
+
+    this.cart.products.map((product: any) => {
+      description += `${product.name} (${product.description}) x ${product.qty}\n`;
+    });
+
+    return description;
+  }
+
   public updateItemsInCart(newValue: ICart) {
     this.itemsVar.next(newValue);
   }

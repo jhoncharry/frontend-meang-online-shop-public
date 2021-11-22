@@ -5,6 +5,7 @@ export class User {
   private _lastname: string;
   private _email: string;
   private _role: Roles | null;
+  private _stripeCustomer: Roles | null;
 
   private _id: string;
 
@@ -19,13 +20,16 @@ export class User {
   public get role(): Roles | null {
     return this._role;
   }
-  public get name(): String | null {
+  public get name(): string | null {
     return this._name;
   }
-  public get lastname(): String | null {
+  public get lastname(): string | null {
     return this._lastname;
   }
-  public get email(): String | null {
+  public get email(): string | null {
     return this._email;
+  }
+  public get stripeCustomer(): string | null {
+    return this._stripeCustomer;
   }
 }

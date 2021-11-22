@@ -34,6 +34,7 @@ export const renewToken = gql`
         lastname
         email
         role
+        stripeCustomer
       }
     }
   }
