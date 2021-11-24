@@ -4,9 +4,12 @@ import {
   ApolloClientOptions,
   ApolloLink,
   InMemoryCache,
+  split,
 } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { onError } from 'apollo-link-error';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 
 const uri = 'http://localhost:3000/graphql'; // <-- add the URL of the GraphQL server here
 
@@ -22,13 +25,29 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     if (networkError) console.log('[Network error]', networkError);
   });
 
-  const link = ApolloLink.from([
+  const urlLink = ApolloLink.from([
     errorLink as any,
     httpLink.create({
       uri,
       withCredentials: true,
     }),
   ]);
+
+  const subscriptionLink = new WebSocketLink({
+    uri: 'ws://localhost:3000/graphql',
+    options: {
+      reconnect: true,
+    },
+  });
+
+  const link = split(
+    ({ query }: any) => {
+      const { kind, operation }: any = getMainDefinition(query);
+      return kind === 'OperationDefinition' && operation === 'subscription';
+    },
+    subscriptionLink,
+    urlLink
+  );
 
   return {
     link,

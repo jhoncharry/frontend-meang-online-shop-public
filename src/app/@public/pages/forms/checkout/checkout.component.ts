@@ -64,13 +64,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             currency: this.currencyCode,
           };
 
+          const stockManage: Array<any> = [];
+          this.cartService.cart.products.map((item) => {
+            stockManage.push({
+              id: +item.id,
+              increment: item.qty! * -1,
+            });
+          });
+
           this.block = true;
 
           loadingData('Charge', 'Payment is in progress....');
 
           //  Enviar informacion y procesar el pago
           this.chargeService
-            .pay(payment)
+            .pay(payment, stockManage)
             .pipe(first())
             .subscribe(
               async ({ data: { chargeOrder }, errors }) => {

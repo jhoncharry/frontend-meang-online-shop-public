@@ -13,8 +13,10 @@ export class ChargeService extends ApiService {
     super(apollo);
   }
 
-  pay(payment: any) {
-    return this.set(payOrder, { payment }).pipe(map((result: any) => result));
+  pay(payment: any, stockChanges: Array<any>) {
+    return this.set(payOrder, { payment, stockChanges }).pipe(
+      map((result: any) => result)
+    );
   }
 
   getChargesByCustomer(

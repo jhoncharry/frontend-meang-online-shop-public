@@ -8,6 +8,7 @@ import { ProductsService } from 'src/app/@core/services/products.service';
 import { ICart } from 'src/app/@public/components/shopping-cart/shopping-cart.interface';
 import { CartService } from 'src/app/@public/core/services/cart.service';
 import { closeAlert, loadingData } from 'src/app/@public/shared/alerts/alerts';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -33,6 +34,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   changeItemsCart: Subscription;
+  listenerUpdateStock: Subscription;
 
   constructor(
     private producService: ProductsService,
@@ -42,6 +44,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.changeItemsCart.unsubscribe();
+    this.listenerUpdateStock.unsubscribe();
+    console.log('CHECKCKCKCKC', this.listenerUpdateStock.closed);
   }
 
   ngOnInit(): void {
@@ -52,6 +56,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.resetVideoValues();
 
       this.loadDataValue(+params.id);
+      this.updateListener(+params.id);
     });
 
     this.changeItemsCart = this.cartService.itemsVar$.subscribe(
@@ -63,6 +68,30 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.product.qty = this.findProduct(+this.product.id)?.qty || 1;
       }
     );
+  }
+
+  updateListener(id: number) {
+    this.listenerUpdateStock = this.producService
+      .stockUpdateListenr(id)
+      .subscribe(
+        ({ data: { selectProductStockUpdate }, errors }) => {
+          if (selectProductStockUpdate) {
+            this.product.stock = selectProductStockUpdate.stock;
+
+            if (this.product.qty! > this.product.stock) {
+              this.product.qty = this.product.stock;
+            }
+
+            if (this.product.stock === 0) {
+              this.product.qty = 1;
+            }
+            return;
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   findProduct(id: number) {
@@ -112,7 +141,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   selectOtherPlatform($event: any) {
-    this.loadDataValue(+$event.target.value);
+    const id = +$event.target.value;
+
+    this.loadDataValue(id);
+    this.updateListener(id);
+    window.history.replaceState({}, '', `/#/games/details/${id}`);
   }
 
   resetVideoValues() {

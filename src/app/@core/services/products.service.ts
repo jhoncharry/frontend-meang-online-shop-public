@@ -10,6 +10,7 @@ import {
   storeProductDetails,
   storeRandomProducts,
 } from 'src/app/@graphql/operators/query/store-product.query';
+import { subscriptionStoreProductSelectStock } from 'src/app/@graphql/operators/subscription/store-product.subscription';
 import { ApiService } from 'src/app/@graphql/service/api.service';
 import { ActiveValues } from '../types/user-active';
 
@@ -129,6 +130,12 @@ export class ProductsService extends ApiService {
         const data = result.data.randomItems.storeProduct;
         return this.manageInformation(data, true);
       })
+    );
+  }
+
+  stockUpdateListenr(id: number) {
+    return this.subscription(subscriptionStoreProductSelectStock, { id }).pipe(
+      map((result: any) => result)
     );
   }
 

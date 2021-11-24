@@ -36,4 +36,14 @@ export class ApiService {
       })
       .pipe(map((result) => result));
   }
+
+  protected subscription(subscription: DocumentNode, variables?: object) {
+    return this.apollo
+      .subscribe({
+        query: subscription,
+        variables,
+        fetchPolicy: 'no-cache',
+      })
+      .pipe(map((result) => result));
+  }
 }
