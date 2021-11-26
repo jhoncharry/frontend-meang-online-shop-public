@@ -5,6 +5,7 @@ import { AuthGuard } from 'src/app/@core/guards/auth.guard';
 import { CheckoutGuard } from 'src/app/@core/guards/checkout.guard';
 import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
+import { FaqComponent } from './faq/faq.component';
 import { ActiveComponent } from './forms/active/active.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { CheckoutComponent } from './forms/checkout/checkout.component';
@@ -17,6 +18,7 @@ import { OrdersComponent } from './orders/orders.component';
 const childRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'faq', component: FaqComponent },
   { path: 'games/details/:id', component: DetailsComponent },
   { path: 'games/:type/:filter', component: GamesComponent },
   {
@@ -32,31 +34,31 @@ const childRoutes: Routes = [
   { path: 'active/:token', component: ActiveComponent },
   { path: 'forgot', component: ForgotComponent },
   { path: 'reset/:token', component: ChangePasswordComponent },
-  {
-    path: '',
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'admin',
-        children: [
-          {
-            path: '',
-            component: AdminComponent,
-            canActivate: [AdminGuard],
-          },
-        ],
-      },
-      /*       {
-        path: 'yyy',
-        children: [
-          {
-            path: '',
-            component: ContactComponent,
-          },
-        ],
-      }, */
-    ],
-  },
+  // {
+  //   path: '',
+  //   canActivate: [AuthGuard],
+  //   children: [
+  //     {
+  //       path: 'admin',
+  //       children: [
+  //         {
+  //           path: '',
+  //           component: AdminComponent,
+  //           canActivate: [AdminGuard],
+  //         },
+  //       ],
+  //     },
+  //     /*       {
+  //       path: 'yyy',
+  //       children: [
+  //         {
+  //           path: '',
+  //           component: ContactComponent,
+  //         },
+  //       ],
+  //     }, */
+  //   ],
+  // },
   /*   
   // Example if we only have one route that need AuthGuard 
   {

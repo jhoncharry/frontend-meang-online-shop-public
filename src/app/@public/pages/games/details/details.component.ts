@@ -45,7 +45,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.changeItemsCart.unsubscribe();
     this.listenerUpdateStock.unsubscribe();
-    console.log('CHECKCKCKCKC', this.listenerUpdateStock.closed);
   }
 
   ngOnInit(): void {

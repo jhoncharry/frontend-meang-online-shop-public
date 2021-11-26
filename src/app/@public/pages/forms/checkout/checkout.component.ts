@@ -31,7 +31,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   block: boolean = false;
   checkComplete: boolean = false;
 
-  key = environment.stripePublicKey;
+  key = environment.stripe_public_key;
   stripeSubscription: Subscription;
 
   changeItemsCart: Subscription;

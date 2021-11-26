@@ -1,9 +1,14 @@
 * {
   color: rgba(255, 255, 255, 0.8);
 }
+.center {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .logotype {
-  width: 25%;
+  width: 40%;
   text-align: left;
   margin: 5px 0 5px 10px;
 }
@@ -18,4 +23,34 @@ p {
 }
 a {
   top: 14%;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.faq {
+  margin-top: 10px;
+}
+
+.delivery {
+  position: relative;
+  top: 32%;
+}
+  @media only screen and (max-width: 575px) {
+  .logotype {
+    width: 60%;
+  }
+}  
+
+@media only screen and (min-width: 875px) and (max-width: 1042px) {
+  .logotype {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 874px) {
+  .logotype {
+    width: 100%;
+  }
 }

@@ -108,7 +108,6 @@ export class GamesComponent implements OnInit {
   // *******************************************************
 
   loadData() {
-    console.log('1111');
     if (this.typeData === TYPE_OPERATION.PLATFORMS) {
       this.products
         .getByPlatform(

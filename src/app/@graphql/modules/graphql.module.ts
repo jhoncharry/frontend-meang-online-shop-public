@@ -10,8 +10,9 @@ import { HttpLink } from 'apollo-angular/http';
 import { onError } from 'apollo-link-error';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { environment } from 'src/environments/environment';
 
-const uri = 'http://localhost:3000/graphql'; // <-- add the URL of the GraphQL server here
+const uri = environment.graphql_api; // <-- add the URL of the GraphQL server here
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -34,7 +35,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   ]);
 
   const subscriptionLink = new WebSocketLink({
-    uri: 'ws://localhost:3000/graphql',
+    uri: environment.graphql_subscription_api,
     options: {
       reconnect: true,
     },

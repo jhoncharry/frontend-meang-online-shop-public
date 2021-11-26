@@ -26,7 +26,6 @@ export class ProductsService extends ApiService {
     return this.get(homePage, { showPlatform: true }).pipe(
       first(),
       map((result: any) => {
-        // console.log('HOME PAGE', result);
         return {
           carousel: result.data.carousel,
           ps4: this.manageInformation(result.data.ps4.storeProduct, true),
@@ -108,7 +107,6 @@ export class ProductsService extends ApiService {
     ).pipe(
       first(),
       map((result: any) => {
-        console.log('THE RESULT', result);
         const details = result.data.details;
         const randomItems = result.data.randomItems;
         return {
@@ -126,7 +124,6 @@ export class ProductsService extends ApiService {
     return this.get(storeRandomProducts).pipe(
       first(),
       map((result: any) => {
-        console.log('RANDOM', result);
         const data = result.data.randomItems.storeProduct;
         return this.manageInformation(data, true);
       })

@@ -20,22 +20,11 @@ export class CheckoutGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-    console.log("acaaa");
     if (this.cartService.cart.total === 0) {
       this.router.navigateByUrl('/');
       return false;
     } else {
       return true;
     }
-
-    /*   return this.cartService.itemsVar$.pipe().subscribe((cart) => {
-      console.log("CHEKCKCKCKC");
-      if (this.cartService.cart.total === 0) {
-        this.router.navigateByUrl('/home');
-        return false;
-      } else {
-        return true;
-      }
-    }); */
   }
 }

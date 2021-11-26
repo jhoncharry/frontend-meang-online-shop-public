@@ -52,7 +52,6 @@ export class OrdersComponent implements OnInit {
       .subscribe(
         ({ data: { chargesByCustomer }, errors }) => {
           if (chargesByCustomer) {
-            console.log(chargesByCustomer);
             chargesByCustomer.charges.map((item: any) =>
               this.charges.push(item)
             );

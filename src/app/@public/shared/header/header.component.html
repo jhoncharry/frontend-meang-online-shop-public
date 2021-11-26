@@ -1,17 +1,28 @@
 <div class="container-fluid bg-dark navbar-dark">
-  <div class="d-flex justify-content-between">
-    <div>
+  <div class="row">
+    <div class="col-sm-4">
       <img
         class="logotype"
-        src="/assets/img/logos/gamezonia.png"
+        src="/assets/img/logos/logo.png"
         alt="LogoTipo de la tienda"
       />
     </div>
-    <div><p>jhon.charryserrato@gmail.com</p></div>
-    <div class="d-flex flex-row-reverse">
-      <a class="nav-link active" href="#">Active link</a>
-      <a class="nav-link" href="#">Link</a>
-      <a class="nav-link disabled" href="#">Disabled link</a>
+    <div class="col-sm-4 justify-content-center text-center m-auto">
+      <span class=""
+        ><i class="fas fa-truck"></i>&nbsp;&nbsp;Envios <b>GRATIS</b> por las
+        compras que realices</span
+      >
+    </div>
+    <div class="col-sm-4 justify-content-center text-center m-auto">
+      <a
+        class="nav-link"
+        [routerLink]="['/faq']"
+        routerLinkActive="router-link-active"
+      >
+        <i class="fas fa-question-circle"></i>&nbsp;&nbsp;<span
+          >Ayuda - Preguntas frecuentes</span
+        ></a
+      >
     </div>
   </div>
 </div>

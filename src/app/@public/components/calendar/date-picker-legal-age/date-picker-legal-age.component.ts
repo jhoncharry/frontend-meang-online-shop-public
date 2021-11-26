@@ -34,7 +34,6 @@ export class DatePickerLegalAgeComponent implements OnInit {
   ngOnInit(): void {}
 
   selectDateChange() {
-    console.log(this.model);
     this.newDate.emit(this.model);
   }
 }

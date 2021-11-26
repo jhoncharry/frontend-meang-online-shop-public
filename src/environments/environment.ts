@@ -4,8 +4,11 @@
 
 export const environment = {
   production: false,
-  stripePublicKey:
+  stripe_public_key:
     'pk_test_51JxDIrLHC9KMOZhNCVtz6mQo6BvVVPeQXSD40t1M4ochcOhlCkJz0SnpP6rou0wRvIGq7Jm1cNycst1WD2sJ2MO200LNmWxJgd',
+  graphql_api: 'http://localhost:3000/graphql',
+  graphql_subscription_api: 'ws://localhost:3000/graphql',
+  admin_route: 'http://localhost:4500',
 };
 
 /*

@@ -12,6 +12,7 @@ import { DetailsModule } from './games/details/details.module';
 import { ShoppingCartModule } from '../components/shopping-cart/shopping-cart.module';
 import { CheckoutModule } from './forms/checkout/checkout.module';
 import { OrdersModule } from './orders/orders.module';
+import { FaqModule } from './faq/faq.module';
 
 @NgModule({
   declarations: [PublicComponent],
@@ -20,6 +21,7 @@ import { OrdersModule } from './orders/orders.module';
     SharedModule,
     RouterModule,
     HomeModule,
+    FaqModule,
     GamesModule,
     DetailsModule,
     ShoppingCartModule,

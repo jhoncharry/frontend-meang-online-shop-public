@@ -10,6 +10,7 @@ import { IMenuItem } from 'src/app/@core/interfaces/menu-item.interface';
 import { CartService } from '../../core/services/cart.service';
 import { REDIRECTS_ROUTES } from 'src/app/@core/types/redirects-routes';
 import { ICart } from '../../components/shopping-cart/shopping-cart.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,8 @@ export class NavbarComponent implements OnInit {
   currentUser$: Observable<User | null>;
 
   cartItemsTotal: number;
+
+  adminRoute: string = environment.admin_route;
 
   constructor(
     private auth: AuthService,
@@ -48,7 +51,6 @@ export class NavbarComponent implements OnInit {
   }
 
   open() {
-    console.log('navbar open cart');
     this.cartService.open();
   }
 

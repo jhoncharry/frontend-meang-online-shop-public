@@ -18,12 +18,10 @@ export class ProductCategoryListComponent {
 
   addToCart($event: IProduct) {
     // Usar la información del producto pasado para llevarlo al carrito de compra
-    console.log('Add to cart$', $event);
     this.cartService.manageProduct($event);
   }
 
   showProductDetails($event: IProduct) {
-    console.log('Show details', $event);
     this.router.navigate(['/games/details', +$event.id]);
   }
 }
