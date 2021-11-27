@@ -66,9 +66,10 @@ export class NavbarComponent implements OnInit {
           }
           this.router.navigateByUrl('/login');
           return;
+        } else if (errors) {
+          Swal.fire('Logout', 'Something went wrong...', 'error');
+          this.router.navigateByUrl('/login');
         }
-        Swal.fire('Logout', 'Something went wrong...', 'error');
-        this.router.navigateByUrl('/login');
       },
       (error) => {
         Swal.fire('Error', 'Something went wrong... Networking!', 'error');
